@@ -9,7 +9,9 @@ def bookends(li: list):
     :param list:
     :return:
     """
-
+    first = li.pop(0)
+    last = li.pop()
+    return [first, last]
 
 
 def inOrder(li : list):
@@ -18,7 +20,10 @@ def inOrder(li : list):
     :param list:
     :return:
     """
-
+    for i in range(len(li)-1):
+        if li[i] > li[i +1]:
+            return False
+    return True
 
 
 def find(li: list, target : int):
@@ -38,7 +43,10 @@ def find(li: list, target : int):
     :param target:
     :return:
     """
-
+    for i in range(len(li)):
+        if li[i] == target:
+            return i
+    return -1
 
 def removeLowest(li):
     """
@@ -48,6 +56,8 @@ def removeLowest(li):
     :param list:
     :return:
     """
+    lowest = min(li)
+    li.remove(lowest)
 
 
 def keepOrder(li: list, value):
@@ -59,6 +69,12 @@ def keepOrder(li: list, value):
     :param value:
     :return:
     """
+    for i in range(len(li)):
+        if li[i] > value:
+            li.insert(i,value)
+            return
+    li.append(value)
+
 
 
 def merge(l1:list, l2:list):
@@ -68,6 +84,27 @@ def merge(l1:list, l2:list):
     Example l1 = [1,3,5] l2 = [2,4,6,8] -> [1,2,3,4,5,6,8]
     :param l1:
     :param l2:
-    :return:
+    :return:w
     """
-    
+    result = []
+    x = 0
+    y = 0
+
+    while x < len(l1) and y < len(l2):
+        if l1[x] <= l2[y]:
+            result.append(l1[x])
+            x += 1
+        else:
+            result.append(l2[y])
+            y += 1
+
+    # Add remaining elements from l1
+    while x < len(l1):
+        result.append(l1[x])
+        x += 1
+
+    # Add remaining elements from l2
+    while y < len(l2):
+        result.append(l2[y])
+        y += 1
+    return result
